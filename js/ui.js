@@ -129,22 +129,6 @@ CC.gameLoop = (function() {
 
 CC.levels = {
 	TutorialBlockWithFriction:    {constructor: Levels.TutorialBlockWithFriction,    lineBreakAfter: false},
-	TutorialBlockWithoutFriction: {constructor: Levels.TutorialBlockWithoutFriction, lineBreakAfter: false},
-	TutorialBlockOnSlope:         {constructor: Levels.TutorialBlockOnSlope,         lineBreakAfter: true },
-	CruiseControlIntro:           {constructor: Levels.CruiseControlIntro,           lineBreakAfter: false},
-	CruiseControl2:               {constructor: Levels.CruiseControl2,               lineBreakAfter: true },
-	StabilizeSinglePendulum:      {constructor: Levels.StabilizeSinglePendulum,      lineBreakAfter: false},
-	SwingUpSinglePendulum:        {constructor: Levels.SwingUpSinglePendulum,        lineBreakAfter: false},
-	StabilizeDoublePendulum:      {constructor: Levels.StabilizeDoublePendulum,      lineBreakAfter: true },
-	RocketLandingNormal:          {constructor: Levels.RocketLandingNormal,          lineBreakAfter: false},
-	RocketLandingUpsideDown:      {constructor: Levels.RocketLandingUpsideDown,      lineBreakAfter: false},
-	RocketLandingMulti:           {constructor: Levels.RocketLandingMulti,           lineBreakAfter: false},
-	RocketLandingHoverslam:       {constructor: Levels.RocketLandingHoverslam,       lineBreakAfter: true },
-	VehicleSteeringSimple:        {constructor: Levels.VehicleSteeringSimple,        lineBreakAfter: false},
-	VehicleRacing:                {constructor: Levels.VehicleRacing,                lineBreakAfter: true },
-	MultirotorIntro:              {constructor: Levels.MultirotorIntro,              lineBreakAfter: false},
-	MultirotorObstacles:          {constructor: Levels.MultirotorObstacles,          lineBreakAfter: false},
-	MultirotorFlip:               {constructor: Levels.MultirotorFlip,               lineBreakAfter: false},
 };
 
 
