@@ -15,8 +15,7 @@ Levels.TutorialBlockWithFriction = function()
 
 Levels.TutorialBlockWithFriction.prototype.levelComplete = function()
 {
-	return Math.abs(this.model.x) < 0.01 
-		&& Math.abs(this.model.dx) < 0.01;
+	return false;
 }
 
 Levels.TutorialBlockWithFriction.prototype.levelFailed = function()
