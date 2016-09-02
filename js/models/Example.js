@@ -1,7 +1,7 @@
 'use strict';
 if (typeof Models === 'undefined') var Models = {};
 
-Models.BlockOnSlope = function(params)
+Models.Example = function(params)
 {
 	var nVars = Object.keys(this.vars).length;
 	for(var i = 0; i < nVars; i++)
@@ -11,7 +11,7 @@ Models.BlockOnSlope = function(params)
 	}
 }
 
-Models.BlockOnSlope.prototype.vars = 
+Models.Example.prototype.vars = 
 {
 	g: 9.81,
 	x: 0,
@@ -22,14 +22,14 @@ Models.BlockOnSlope.prototype.vars =
 	T: 0,
 };
 
-Models.BlockOnSlope.prototype.simulate = function (dt, controlFunc)
+Models.Example.prototype.simulate = function (dt, controlFunc)
 {
-	var copy = new Models.BlockOnSlope(this);
+	var copy = new Models.Example(this);
 	var state = [this.x, this.dx];
-	copy.F = controlFunc(new Models.BlockOnSlope(this));
+	copy.F = controlFunc(new Models.Example(this));
 	copy.F = Math.max(-50,Math.min(50,copy.F));
 	if(typeof copy.F != 'number' || isNaN(copy.F)) throw "Error: The controlFunction must return a number.";
-	var soln = numeric.dopri(0,dt,state,function(t,x){ return Models.BlockOnSlope.ode(copy,x); },1e-4).at(dt);	
+	var soln = numeric.dopri(0,dt,state,function(t,x){ return Models.Example.ode(copy,x); },1e-4).at(dt);	
 	
 	copy.x = soln[0];
 	copy.dx = soln[1];
@@ -37,13 +37,13 @@ Models.BlockOnSlope.prototype.simulate = function (dt, controlFunc)
 	return copy;	
 }
 
-Models.BlockOnSlope.ode = function (_this, x)
+Models.Example.ode = function (_this, x)
 {
 	return[x[1],_this.F-Math.sin(_this.slope)*_this.g-_this.friction*x[1]];
 }
 
 
-Models.BlockOnSlope.prototype.draw = function (ctx, canvas)
+Models.Example.prototype.draw = function (ctx, canvas)
 {
 	// clear canvas
 	ctx.setTransform(1,0,0,1,0,0);
@@ -82,7 +82,7 @@ Models.BlockOnSlope.prototype.draw = function (ctx, canvas)
 	drawLine(ctx,forceArrow.x2,forceArrow.y2,forceArrow.x2-.1,forceArrow.y2+.1);
 }
 
-Models.BlockOnSlope.prototype.infoText = function ()
+Models.Example.prototype.infoText = function ()
 {
 	return  "/* Position        */ block.x  = " + round(this.x,2)
 		+ "\n/* Velocity        */ block.dx = " + round(this.dx,2)

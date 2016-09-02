@@ -38,7 +38,7 @@ CC.loadCodeAndReset = function () {
 }
 
 CC.loadLevel = function(name) {
-	if(!(name in CC.levels)) name = 'TutorialBlockWithFriction';
+	if(!(name in CC.levels)) name = 'Example';
 	localStorage.setItem("lastLevel",name);
 	this.activeLevelName = name;
 	this.activeLevel = new this.levels[name].constructor();
@@ -128,7 +128,7 @@ CC.gameLoop = (function() {
 }).bind(CC);
 
 CC.levels = {
-	TutorialBlockWithFriction:    {constructor: Levels.TutorialBlockWithFriction,    lineBreakAfter: false},
+	Example:    {constructor: Levels.Example,    lineBreakAfter: false},
 };
 
 
