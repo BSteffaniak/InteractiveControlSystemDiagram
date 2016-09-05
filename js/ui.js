@@ -10,7 +10,6 @@ if(document.location.search.length > 1){
 }
 
 CC.canvas = document.getElementById('cas');
-CC.context = CC.canvas.getContext('2d');
 
 (function(){
 	var $canvas = $('#cas');
@@ -42,6 +41,7 @@ CC.loadLevel = function(name) {
 	localStorage.setItem("lastLevel",name);
 	this.activeLevelName = name;
 	this.activeLevel = new this.levels[name].constructor();
+	this.activeLevel.drawBackground(this.canvas);
 	$('#levelDescription').html(this.activeLevel.description);
 	$('#levelTitle').text(this.activeLevel.title);
 	document.title = this.activeLevel.title +': Control Challenges';
@@ -121,7 +121,7 @@ CC.gameLoop = (function() {
 		}
 		this.variableInfo.text(this.variableInfo.text()+this.activeLevel.infoText());	
 	}
-	this.activeLevel.draw(this.context,this.canvas);
+	this.activeLevel.draw(this.canvas);
 	
 	if(this.running()) requestAnimationFrame(this.gameLoop);
 	else setTimeout( function() {requestAnimationFrame(CC.gameLoop);}, 200);

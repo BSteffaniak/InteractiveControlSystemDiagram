@@ -42,44 +42,36 @@ Models.Example.ode = function (_this, x)
 	return[x[1],_this.F-Math.sin(_this.slope)*_this.g-_this.friction*x[1]];
 }
 
-
-Models.Example.prototype.draw = function (ctx, canvas)
+Models.Example.prototype.drawBackground = function(canvasElement)
 {
-	// clear canvas
-	ctx.setTransform(1,0,0,1,0,0);
-	ctx.clearRect(0,0,canvas.width,canvas.height);
-	
-	ctx.translate(canvas.width/2,canvas.height/2);
-	ctx.scale(canvas.width/8.0,-canvas.width/8.0);
-	ctx.rotate(this.slope);
+    // todo: clear canvas
 
+    var rectCoords = [
+        { x: 100, y: 100, height: 100, width: 200 },
+        { x: 100, y: 400, height: 100, width: 200 },
+    ];
 
-	ctx.strokeStyle="#333366";
-	drawLine(ctx,-10,-.025,10,-.025,0.05);
+    var canvas = d3.select(canvasElement)
+      .append("svg:svg")
+      .attr("width", 800)
+      .attr("height", 600);
 
-	var cartWidth = 0.4;
-	var cartHeight = 0.7*cartWidth;
+    var rects = canvas
+        .selectAll("g")
+        .data(rectCoords)
+        .enter()
+        .append("g");
 
-	// block
-	ctx.fillStyle="#4444FF";
-	ctx.fillRect(this.x-cartWidth/2,0,cartWidth,cartHeight);
+    rects.append("rect")
+        .attr("x", function(d) { return d.x } )
+        .attr("y", function(d) { return d.y } )
+        .attr("width", function (d) { return d.width } )
+        .attr("height", function (d) { return d.height } );
+}
 
-	// force arrow
-	var forceArrow = {x1:this.x,y1:0.5*cartHeight,x2:this.x+0.1*this.F,y2:0.5*cartHeight};
-	ctx.strokeStyle="#FF0000";
-    ctx.lineCap = 'round';
-	drawLine(ctx,forceArrow.x1,forceArrow.y1,forceArrow.x2,forceArrow.y2,1/40.0);
-	drawLine(ctx,forceArrow.x2,forceArrow.y2,forceArrow.x2-Math.sign(this.F)*0.1,forceArrow.y2+0.05,1/40.0);
-	drawLine(ctx,forceArrow.x2,forceArrow.y2,forceArrow.x2-Math.sign(this.F)*0.1,forceArrow.y2-0.05,1/40.0);
+Models.Example.prototype.draw = function(canvas)
+{
 
-
-	// target arrow
-	var forceArrow = {x1:0,y1:4.5*cartHeight,x2:0,y2:2*cartHeight};
-	ctx.strokeStyle="#4444FF";
-    ctx.lineCap = 'round';
-	drawLine(ctx,forceArrow.x1,forceArrow.y1,forceArrow.x2,forceArrow.y2,1/30.0);
-	drawLine(ctx,forceArrow.x2,forceArrow.y2,forceArrow.x2+.1,forceArrow.y2+.1);
-	drawLine(ctx,forceArrow.x2,forceArrow.y2,forceArrow.x2-.1,forceArrow.y2+.1);
 }
 
 Models.Example.prototype.infoText = function ()
